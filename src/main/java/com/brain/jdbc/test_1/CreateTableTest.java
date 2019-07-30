@@ -5,8 +5,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class CreateTableTest {
+/**
+ * Создание таблицы в базе данных
+ */
 
+public class CreateTableTest {
+    /**
+     * Создаем строку в которой прописываем создание таблицы со столбцами
+     */
     private static final String SQL_CREATE_QUERY =
             "CREATE TABLE product"
                     + "("
@@ -21,13 +27,12 @@ public class CreateTableTest {
 
     public static void main(String[] args) {
 
-        String dbHost = "jdbc:postgresql://localhost:5432/jdbc-test";
-        String dbUser = "postgres";
-        String dbPass = "postgres";
-        try (Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPass);
-             PreparedStatement preparedStatement = conn.prepareStatement(SQL_CREATE_QUERY)) {
-            // Выполняем запрос в БД
-            preparedStatement.execute();
+        String dbHost = "jdbc:postgresql://localhost:5432/jdbc-test"; // прописываем URL адрес нашей БД
+        String dbUser = "postgres"; // прописываем наш логин
+        String dbPass = "eldorado92";  //прописываем на пароль
+        try (Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPass); //делаем подключение к БД
+             PreparedStatement preparedStatement = conn.prepareStatement(SQL_CREATE_QUERY)) {  // Выполняем запрос в БД
+            preparedStatement.execute(); //выполняем SQL-команду.
 
         } catch (SQLException e) {
             System.err.format("SQL error: %s\n%s", e.getSQLState(), e.getMessage());

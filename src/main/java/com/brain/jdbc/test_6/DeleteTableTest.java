@@ -5,19 +5,23 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class DeleteTableTest {
+/**
+ * Выполнение удаление в БД.
+ */
 
+public class DeleteTableTest {
+    /**
+     * В строке прописываем какое именно хотим сделать удаление
+     */
     private static final String SQL_DELETE_QUERY = "DELETE FROM public.product WHERE count=0;";
 
     public static void main(String[] args) {
 
-        String dbHost = "jdbc:postgresql://localhost:5432/jdbc-test";
-        String dbUser = "postgres";
-        String dbPass = "postgres";
-        try (Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPass);
-             PreparedStatement preparedStatement = conn.prepareStatement(SQL_DELETE_QUERY)) {
-
-            // Выполняем запрос в БД
+        String dbHost = "jdbc:postgresql://localhost:5432/jdbc-test";    // прописываем URL адрес нашей БД
+        String dbUser = "postgres";    // прописываем наш логин
+        String dbPass = "eldorado92";      //прописываем наш пароль
+        try (Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPass);  //делаем подключение к БД
+             PreparedStatement preparedStatement = conn.prepareStatement(SQL_DELETE_QUERY)) {   //выполняем запрос к БД
             int row = preparedStatement.executeUpdate();
 
             // результат выполнения
