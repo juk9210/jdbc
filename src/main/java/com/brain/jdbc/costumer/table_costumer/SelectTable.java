@@ -1,21 +1,20 @@
-package com.brain.jdbc.test_5;
-
-import com.brain.jdbc.Product;
-
-import java.math.BigDecimal;
+package com.brain.jdbc.costumer.table_costumer;
+import com.brain.jdbc.costumer.Customer;
 import java.sql.*;
 
 /**
  * Выборка данных из БД
+ *
+ * @author Shakhov Yevhen.
  */
 
-public class SelectTableTest {
+public class SelectTable {
     /**
      * В строках прописываем какую выборку будем делать.
      */
-    private static final String SQL_SELECT_ALL_QUERY = "SELECT * FROM product;";
-    private static final String SQL_SELECT_BY_ID_QUERY = "SELECT * FROM product where id=3;";
-    private static final String SQL_SELECT_BY_NAME_QUERY = "SELECT * FROM product where name='Тостер';";
+    private static final String SQL_SELECT_ALL_QUERY = "SELECT * FROM customer;";
+    private static final String SQL_SELECT_BY_CITY_QUERY = "SELECT * FROM customer ORDER BY city;";
+    private static final String SQL_SELECT_BY_SURNAME_QUERY = "SELECT * FROM customer ORDER BY SURNAME;";
 
     public static void main(String[] args) {
         String dbHost = "jdbc:postgresql://localhost:5432/jdbc-test";    // прописываем URL адрес нашей БД
@@ -23,8 +22,8 @@ public class SelectTableTest {
         String dbPass = "eldorado92";                 //прописываем наш пароль
         try (Connection conn = DriverManager.getConnection( dbHost, dbUser, dbPass );  //делаем подключение к БД
              PreparedStatement preparedStatement1 = conn.prepareStatement( SQL_SELECT_ALL_QUERY ); //выполняем запрос к БД
-             PreparedStatement preparedStatement2 = conn.prepareStatement( SQL_SELECT_BY_ID_QUERY ); //выполняем запрос к БД
-             PreparedStatement preparedStatement3 = conn.prepareStatement( SQL_SELECT_BY_NAME_QUERY )//выполняем запрос к БД
+             PreparedStatement preparedStatement2 = conn.prepareStatement( SQL_SELECT_BY_CITY_QUERY ); //выполняем запрос к БД
+             PreparedStatement preparedStatement3 = conn.prepareStatement( SQL_SELECT_BY_SURNAME_QUERY )//выполняем запрос к БД
         ) {
 
             processData( preparedStatement1 ); //обращаемся к методу,который выводит данные из БД с первой выборкой
@@ -48,8 +47,8 @@ public class SelectTableTest {
     private static void processData(PreparedStatement preparedStatement) throws SQLException {
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Product product = mapToProduct( resultSet );
-            System.out.println( product );
+            Customer customer = mapToCustomer( resultSet );
+            System.out.println( customer );
         }
     }
 
@@ -60,18 +59,16 @@ public class SelectTableTest {
      * @return
      * @throws SQLException
      */
-    private static Product mapToProduct(ResultSet result) throws SQLException {
+    private static Customer mapToCustomer(ResultSet result) throws SQLException {
         long id = result.getLong( "id" );
-        String name = result.getString( "name" );
-        BigDecimal cost = result.getBigDecimal( "cost" );
-        int count = result.getInt( "count" );
-        String description = result.getString( "description" );
-        Timestamp createdDate = result.getTimestamp( "created_date" );
-        Timestamp updateDate = result.getTimestamp( "update_date" );
+        String firstName = result.getString( "firstName" );
+        String surName = result.getString( "surName" );
+        long phone = result.getLong( "phone" );
+        String email = result.getString( "email" );
+        String city = result.getString( "city" );
+        long discount = result.getLong( "discount" );
 
-        Product product = new Product( id, name, description, cost, count );
-        product.setCreationDate( createdDate.toLocalDateTime() );
-        product.setUpdateDate( updateDate.toLocalDateTime() );
-        return product;
+        Customer customer = new Customer(id,firstName,surName,phone,email,city,discount);
+        return customer;
     }
 }

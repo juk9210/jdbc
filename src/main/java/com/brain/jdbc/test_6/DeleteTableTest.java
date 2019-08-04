@@ -20,15 +20,15 @@ public class DeleteTableTest {
         String dbHost = "jdbc:postgresql://localhost:5432/jdbc-test";    // прописываем URL адрес нашей БД
         String dbUser = "postgres";    // прописываем наш логин
         String dbPass = "eldorado92";      //прописываем наш пароль
-        try (Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPass);  //делаем подключение к БД
-             PreparedStatement preparedStatement = conn.prepareStatement(SQL_DELETE_QUERY)) {   //выполняем запрос к БД
+        try (Connection conn = DriverManager.getConnection( dbHost, dbUser, dbPass );  //делаем подключение к БД
+             PreparedStatement preparedStatement = conn.prepareStatement( SQL_DELETE_QUERY )) {   //выполняем запрос к БД
             int row = preparedStatement.executeUpdate();
 
             // результат выполнения
-            System.out.println(row);
+            System.out.println( row );
 
         } catch (SQLException e) {
-            System.err.format("SQL error: %s\n%s", e.getSQLState(), e.getMessage());
+            System.err.format( "SQL error: %s\n%s", e.getSQLState(), e.getMessage() );
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -20,23 +20,23 @@ public class UpdateTableTest {
         String dbHost = "jdbc:postgresql://localhost:5432/jdbc-test";  // прописываем URL адрес нашей БД
         String dbUser = "postgres";               // прописываем наш логин
         String dbPass = "eldorado92";               //прописываем наш пароль
-        try (Connection conn = DriverManager.getConnection(dbHost, dbUser, dbPass);      //делаем подключение к БД
-             PreparedStatement preparedStatement = conn.prepareStatement(SQL_UPDATE_QUERY)) {   // Готовим запрос в БД
+        try (Connection conn = DriverManager.getConnection( dbHost, dbUser, dbPass );      //делаем подключение к БД
+             PreparedStatement preparedStatement = conn.prepareStatement( SQL_UPDATE_QUERY )) {   // Готовим запрос в БД
             /*
             Добавление данных в таблицу
              */
-            preparedStatement.setBigDecimal(1, new BigDecimal(3510.55));
-            preparedStatement.setInt(2, 0);
-            preparedStatement.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+            preparedStatement.setBigDecimal( 1, new BigDecimal( 3510.55 ) );
+            preparedStatement.setInt( 2, 0 );
+            preparedStatement.setTimestamp( 3, Timestamp.valueOf( LocalDateTime.now() ) );
 
             // Выполняем запрос в БД
             int row = preparedStatement.executeUpdate();
 
             // результат выполнения
-            System.out.println(row);
+            System.out.println( row );
 
         } catch (SQLException e) {
-            System.err.format("SQL error: %s\n%s", e.getSQLState(), e.getMessage());
+            System.err.format( "SQL error: %s\n%s", e.getSQLState(), e.getMessage() );
         } catch (Exception e) {
             e.printStackTrace();
         }
