@@ -1,4 +1,4 @@
-package com.brain.jdbc.costumer;
+package com.brain.jdbc.customer;
 
 import lombok.Data;
 import lombok.NonNull;

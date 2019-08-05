@@ -1,4 +1,4 @@
-package com.brain.jdbc.costumer.table_costumer;
+package com.brain.jdbc.customer.table_customer;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

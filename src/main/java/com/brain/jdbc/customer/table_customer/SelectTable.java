@@ -1,5 +1,5 @@
-package com.brain.jdbc.costumer.table_costumer;
-import com.brain.jdbc.costumer.Customer;
+package com.brain.jdbc.customer.table_customer;
+import com.brain.jdbc.customer.Customer;
 import java.sql.*;
 
 /**
